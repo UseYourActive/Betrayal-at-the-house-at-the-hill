@@ -30,7 +30,7 @@ public class UserController {
     //region GET
     @Transactional
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully found a user."),
+            @ApiResponse(responseCode = "202", description = "Successfully found a user."),
             @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = "text/html"))
     })
     @Operation(description = "From the users request finds an already existing in the database user.",
