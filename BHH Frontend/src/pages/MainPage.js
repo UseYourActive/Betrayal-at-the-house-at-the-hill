@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
-import LobbyComponent from "../components/LobbyComponent";
+import LoginComponent from "../components/LoginComponent";
 
 const MainPage = () => {
   return (
     <div id="main-container">
-      <LobbyComponent />
+      <LoginComponent />
     </div>
   );
 };

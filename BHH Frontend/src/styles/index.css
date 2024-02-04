@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Honk&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 .centered-container {
   position: absolute;
   top: 50%;
@@ -24,6 +25,8 @@
   color: #fff;
   font-size: 80px;
   text-shadow: rgb(255, 0, 0) 0px 0px 20px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
   animation: text-flicker 3s linear infinite;
 }
 
@@ -147,6 +150,8 @@
   color: #fff;
   text-shadow: rgba(255, 255, 0, 1) 0px 0px 20px;
   display: inline-block;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 .header i.fa-solid.fa-ghost {
   color: #fff;
@@ -209,18 +214,131 @@
  ChatComponent CSS 
  */
 .big-container .left-component h2 span.loggedText {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 40px;
+  color: #fff;
+}
+.big-container .left-component h2 span.username {
+  font-size: 40px;
+  color: #fff;
+  text-shadow: rgb(255, 0, 0) 0px 0px 10px;
+}
+.big-container .left-component h2 span.loggedText,
+.big-container .left-component h2 span.username {
+  position: relative;
+  left: 40px;
+  top: 10px;
+}
+.big-container h1.textHeader {
   font-family: "Creepster", system-ui;
   font-weight: 400;
   font-style: normal;
   text-align: center;
   font-size: 50px;
   color: #fff;
-  text-shadow: rgba(255, 255, 0, 1) 0px 0px 20px;
+  text-shadow: rgba(255, 255, 0, 1) 0px 0px 10px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+
+  position: absolute;
+  left: 50%;
+  text-transform: uppercase;
+  transform: translate(-50%, 20%);
+
+  animation: gameLobby-flicker 3s linear infinite;
 }
-.big-container .left-component h2 span.username {
+
+@keyframes gameLobby-flicker {
+  0% {
+    text-shadow: rgba(255, 255, 0, 0.1) 0px 0px 15px;
+  }
+  2% {
+    text-shadow: rgba(255, 255, 0, 0.1) 0px 0px 15px;
+  }
+  4% {
+    text-shadow: rgba(255, 255, 0, 1) 0px 0px 15px;
+  }
+
+  19% {
+    text-shadow: rgba(255, 255, 0, 1) 0px 0px 15px;
+  }
+  21% {
+    text-shadow: rgba(255, 255, 0, 0.1) 0px 0px 15px;
+  }
+  23% {
+    text-shadow: rgba(255, 255, 0, 1) 0px 0px 15px;
+  }
+
+  80% {
+    text-shadow: rgba(255, 255, 0, 1) 0px 0px 15px;
+  }
+  83% {
+    text-shadow: rgba(255, 255, 0, 0.4) 0px 0px 15px;
+  }
+  87% {
+    text-shadow: rgba(255, 255, 0, 1) 0px 0px 15px;
+  }
+}
+
+.chat-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#messages {
+  width: 940px;
+  height: 500px; /* Set your desired maximum height for the visible part of the chatbox */
+  padding: 10px;
+  overflow: hidden; /* Hide overflowing content */
+  margin: 0 auto;
+  background-image: url("../assets/saigo_no_tikvo.jpg") !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 0px 3px 4px rgba(255, 117, 24, 0.75);
+}
+
+#messagesContent {
+  overflow-y: auto;
+  max-height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  left: 5px;
+  bottom: 20px;
+}
+
+.message {
+  word-wrap: break-word;
+  padding: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 1);
+  margin-bottom: 10px;
+  max-width: 880px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.latin-text {
   font-family: "Kalam", cursive;
   font-weight: 700;
   font-style: normal;
-  font-size: 40px;
-  color: #fff;
+  font-size: 20px;
+}
+
+.cyrillic-text {
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.input-container {
+  position: relative;
+  top: 10px;
 }

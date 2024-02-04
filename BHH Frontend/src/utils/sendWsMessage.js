@@ -1,10 +1,13 @@
 const sendWsMessage = (socket, dataCollection, username, instruction) => {
-  let formattedData = JSON.stringify({
-    ...dataCollection,
-    username,
-    instruction,
-  });
-  socket.send(formattedData);
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    let formattedData = JSON.stringify({
+      ...dataCollection,
+      username,
+      instruction,
+    });
+    socket.send(formattedData);
+  } else {
+  }
 };
 
 export default sendWsMessage;

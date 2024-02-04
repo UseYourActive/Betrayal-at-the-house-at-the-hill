@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { setUsername, logUser } from "../actions/authActions";
+import useFetch from "../hooks/useFetch";
 const LoginComponent = () => {
   const dispatch = useDispatch();
   const userInput = useRef();
-  const socket = new WebSocket("ws://25.48.115.65:3001");
-
+  const socket = new WebSocket("ws://26.128.47.198:3001");
+  const navigate = useNavigate();
   const userIn = () => {
     let usernameValue = userInput.current.value.trim();
     if (usernameValue !== "") {
@@ -18,6 +21,7 @@ const LoginComponent = () => {
       );
       dispatch(logUser());
       dispatch(setUsername(usernameValue));
+      navigate("/lobby");
     } else {
       alert("Enter not null message, LUL/");
     }

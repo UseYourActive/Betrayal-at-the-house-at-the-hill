@@ -5,14 +5,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import LobbyComponent from "./components/LobbyComponent";
 import store from "./store/store";
 import VideoComponent from "./components/VideoComponent";
 import GamePage from "./pages/GamePage";
+import MainPage from "./pages/MainPage";
+import LobbyPage from "./pages/LobbyPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: [<VideoComponent />, <LobbyComponent />],
+    element: [<VideoComponent />, <MainPage />],
+    errorElement: <p>Ehohoho</p>,
+  },
+  {
+    path: "/lobby",
+    element: [<VideoComponent />, <LobbyPage />],
     errorElement: <p>Ehohoho</p>,
   },
   {

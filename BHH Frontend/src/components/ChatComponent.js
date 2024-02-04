@@ -1,13 +1,20 @@
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import sendWsMessage from "../utils/sendWsMessage";
+import isCyrillic from "../utils/isCyrillic";
+import { messageManager } from "../utils/chatUtils";
+
 const ChatComponent = () => {
   let navigate = useNavigate();
-  let socket = new WebSocket("ws://25.48.115.65:3001");
+  let socket = new WebSocket("ws://26.128.47.198:3001");
   let [messages, setMessages] = useState([]); // message structure : "{ test, username, guideByServer }"
-  let username = useSelector((state) => state.auth.user);
+  let userFromRedux = useSelector((state) => state.auth.user);
+  let username =
+    userFromRedux === "" ? "Orozov SYS SIG IS NOT Gei" : userFromRedux;
   let messageInputRef = useRef();
+  let messageContainer = useRef();
+
   socket.addEventListener("message", (event) => {
     let newMessage = JSON.parse(event.data);
     if (!newMessage.text) {
@@ -16,50 +23,39 @@ const ChatComponent = () => {
       setMessages([...messages, newMessage]);
     }
   });
-
   const readyPage = () => {
     navigate("/game1");
   };
 
-  const userJoined = (username) => {
-    return (
-      <div key={Math.random() * 30984 + 2} style={{ color: "white" }}>
-        <span>{username} joined the chat.</span>
-      </div>
-    );
-  };
-
-  const userTyped = ({ text, username, instruction }) => {
-    return (
-      <div key={Math.random() * 30984 + 2} style={{ color: "white" }}>
-        <span style={{ fontWeight: "bold" }}> {username}</span>
-        <span style={{ fontWeight: "italic" }}> {text} </span>
-      </div>
-    );
-  };
-
-  const messageManager = (message) => {
-    if (message.instruction === "doConnect") {
-      return userJoined(message.username);
-    } else if (message.instruction === "sendMessage") {
-      return userTyped(message);
-    }
-  };
   return (
     <div>
       <div className="big-container">
-        <h1>Game Lobby</h1>
+        <h1 className="textHeader">Game Lobby</h1>
         <div className="left-component">
           <h2>
             {" "}
             <span className="loggedText">Logged as:</span>{" "}
-            <span className="username"> {username}</span>{" "}
+            <span
+              className={
+                "username " +
+                (isCyrillic(username) ? "cyrillic-text" : "latin-text")
+              }
+            >
+              {" "}
+              {username}
+            </span>{" "}
           </h2>{" "}
         </div>
         <div className="right-component">
           <div className="chat-container">
-            <div id="messages">
-              {messages.map((message) => messageManager(message))}
+            <div id="messages" ref={messageContainer}>
+              <div id="messagesContent">
+                {messages.map((message, index) => (
+                  <div key={index} className="message">
+                    {messageManager(message)}
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="input-container">
               <input
@@ -71,15 +67,17 @@ const ChatComponent = () => {
               <button
                 id="send-button"
                 onClick={() => {
-                  let text = messageInputRef.current.value.trim();
-                  let dataCollection = { text };
-                  sendWsMessage(
-                    socket,
-                    dataCollection,
-                    username,
-                    "sendMessage"
-                  );
-                  messageInputRef.current.value = "";
+                  if (messageInputRef.current.value !== "") {
+                    let text = messageInputRef.current.value.trim();
+                    let dataCollection = { text };
+                    sendWsMessage(
+                      socket,
+                      dataCollection,
+                      username,
+                      "sendMessage"
+                    );
+                    messageInputRef.current.value = "";
+                  }
                 }}
               >
                 Send

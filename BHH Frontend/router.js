@@ -22,8 +22,8 @@ wss.on("connection", (ws) => {
       } else {
         addClientAndRelay({ username, text, instruction });
       }
-      console.table(clients);
     } else if (instruction === "sendMessage") {
+      console.log({ text, username, instruction });
       relayToClients({ username, text, instruction, isUserTaken: true });
     } else {
       console.log("Instruction not recongnised");
