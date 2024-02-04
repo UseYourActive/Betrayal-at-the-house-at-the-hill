@@ -3,6 +3,9 @@ package com.bhh.user_authentication_service.rest.controllers;
 import com.bhh.user_authentication_service.api.operations.create.CreateUserOperation;
 import com.bhh.user_authentication_service.api.operations.create.CreateUserRequest;
 import com.bhh.user_authentication_service.api.operations.create.CreateUserResponse;
+import com.bhh.user_authentication_service.api.operations.find.byusername.FindUserByUsernameOperation;
+import com.bhh.user_authentication_service.api.operations.find.byusername.FindUserByUsernameRequest;
+import com.bhh.user_authentication_service.api.operations.find.byusername.FindUserByUsernameResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,8 +25,24 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     private final CreateUserOperation createUserOperation;
+    private final FindUserByUsernameOperation findUserByUsernameOperation;
 
     //region GET
+    @Transactional
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Successfully found a user."),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = "text/html"))
+    })
+    @Operation(description = "From the users request finds an already existing in the database user.",
+            summary = "Finds a user by username.")
+    @GetMapping(path = "/{username}")
+    public ResponseEntity<FindUserByUsernameResponse> findUserByUsername(@PathVariable(value = "username") String input) {
+        FindUserByUsernameRequest request = FindUserByUsernameRequest.builder()
+                .username(input)
+                .build();
+
+        return new ResponseEntity<>(findUserByUsernameOperation.process(request), HttpStatus.ACCEPTED);
+    }
     //endregion
 
     //region POST
