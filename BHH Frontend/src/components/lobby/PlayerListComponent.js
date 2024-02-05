@@ -1,11 +1,10 @@
-import useFetch from "../hooks/useFetch";
-
 const PlayerListComponent = () => {
   return (
     <div
       className="playerList"
       style={{
         backgroundColor: "blue",
+        color: "white",
         width: "20%",
         display: "flex",
         flexDirection: "column",

@@ -8,6 +8,6 @@ export const logOutUser = () => {
   return { type: LOGOUT_USER };
 };
 
-export const setUsername = (name) => {
-  return { type: SET_USERNAME, payload: { name } };
+export const setUsername = (name, user_id) => {
+  return { type: SET_USERNAME, payload: { name, user_id } };
 };

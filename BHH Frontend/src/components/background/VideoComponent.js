@@ -1,6 +1,4 @@
-import bckgVideo from "../assets/bckgvideo.mp4";
-import LoginComponent from "./LoginComponent";
-
+import bckgVideo from "./bckgvideo.mp4";
 const VideoComponent = () => {
   return (
     <video autoPlay muted loop id="myVideo">

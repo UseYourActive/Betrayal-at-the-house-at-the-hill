@@ -2,6 +2,7 @@ import { LOGOUT_USER, LOG_USER, SET_USERNAME } from "../actions/actionTypes.js";
 
 const initialState = {
   isLogged: false,
+  user_id: "",
   user: "",
 };
 
@@ -21,6 +22,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.name,
+        user_id: action.payload.user_id,
       };
 
     default:

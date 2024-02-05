@@ -1,30 +1,42 @@
 import React from "react";
 import "./styles/index.css";
 import "./styles/reset.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import VideoComponent from "./components/VideoComponent";
 import GamePage from "./pages/GamePage";
-import MainPage from "./pages/MainPage";
 import LobbyPage from "./pages/LobbyPage";
+import VideoComponent from "./components/background/VideoComponent";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import Main from "./pages/main";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: [<VideoComponent />, <MainPage />],
-    errorElement: <p>Ehohoho</p>,
+    element: [<Main />],
+    errorElement: <p>GRESHKA SI</p>,
+  },
+  {
+    path: "/login",
+    element: [<VideoComponent />, <LoginPage />],
+    errorElement: <p>GRESHKA SI</p>,
   },
   {
     path: "/lobby",
     element: [<VideoComponent />, <LobbyPage />],
-    errorElement: <p>Ehohoho</p>,
+    errorElement: <p>GRESHKA SI</p>,
   },
   {
     path: "/game1",
     element: [<GamePage />],
-    errorElement: <p>Ehohoho</p>,
+    errorElement: <p>GRESHKA SI</p>,
+  },
+  {
+    path: "/register",
+    element: [<VideoComponent />, <RegisterPage />],
+    errorElement: <p>GRESHKA SI</p>,
   },
 ]);
 

@@ -1,17 +1,16 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import sendWsMessage from "../utils/sendWsMessage";
-import isCyrillic from "../utils/isCyrillic";
-import { messageManager } from "../utils/chatUtils";
+import sendWsMessage from "../../utils/sendWsMessage";
+import isCyrillic from "../../utils/isCyrillic";
+import { messageManager } from "../../utils/chatUtils";
 
 const ChatComponent = () => {
   let navigate = useNavigate();
   let socket = new WebSocket("ws://26.128.47.198:3001");
   let [messages, setMessages] = useState([]); // message structure : "{ test, username, guideByServer }"
   let userFromRedux = useSelector((state) => state.auth.user);
-  let username =
-    userFromRedux === "" ? "Orozov SYS SIG IS NOT Gei" : userFromRedux;
+  let username = userFromRedux === "" ? "<Nameless>" : userFromRedux;
   let messageInputRef = useRef();
   let messageContainer = useRef();
 

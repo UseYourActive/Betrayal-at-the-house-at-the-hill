@@ -1,9 +1,11 @@
-import LobbyComponent from "../components/LobbyComponent";
+import ChatComponent from "../components/lobby/ChatComponent";
+import PlayerListComponent from "../components/lobby/PlayerListComponent";
 
 const LobbyPage = () => {
   return (
     <div id="main-container">
-      <LobbyComponent />
+      <ChatComponent />
+      <PlayerListComponent />
     </div>
   );
 };
