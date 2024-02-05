@@ -1,6 +1,9 @@
 package com.bhh.user_authentication_service.rest.handlers;
 
 import com.bhh.user_authentication_service.core.exceptions.UserNotFoundException;
+import lombok.extern.slf4j.Slf4j;
+import org.postgresql.util.PSQLException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RestClientException.class)
@@ -45,5 +49,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         });
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        if (e.getCause() instanceof PSQLException) {
+            PSQLException pgsqlException = (PSQLException) e.getCause();
+            String sqlState = pgsqlException.getSQLState();
+            log.error("SQL State: {}", sqlState);
+            log.error("Exception details:", e);
+
+            if (sqlState.equals("23505")) { // PostgreSQL error code for unique constraint violation
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("Username already exists. Please choose a different username.");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body("An error occurred: " + e.getMessage());
     }
 }
