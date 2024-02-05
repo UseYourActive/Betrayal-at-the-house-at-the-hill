@@ -30,14 +30,14 @@ public class Character {
     private Double height;
 
     @OneToOne
-    private Speed speed;
+    private Trait speed;
 
     @OneToOne
-    private Might might;
+    private Trait might;
 
     @OneToOne
-    private Sanity sanity;
+    private Trait sanity;
 
     @OneToOne
-    private Knowledge knowledge;
+    private Trait knowledge;
 }
