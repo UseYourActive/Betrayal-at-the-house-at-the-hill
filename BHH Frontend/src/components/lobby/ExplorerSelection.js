@@ -1,12 +1,12 @@
 const ExplorerSelection = () => {
   return (
-    <div>
-      <button>Y</button>
-      <button>W</button>
-      <button>G</button>
-      <button>R</button>
-      <button>P</button>
-      <button>B</button>
+    <div className="explorer-select-container">
+      <button style={{ backgroundColor: "yellow" }}>Y</button>
+      <button style={{ backgroundColor: "white", color: "black" }}>W</button>
+      <button style={{ backgroundColor: "green" }}>G</button>
+      <button style={{ backgroundColor: "red" }}>R</button>
+      <button style={{ backgroundColor: "purple" }}>P</button>
+      <button style={{ backgroundColor: "blue", color: "white" }}>B</button>
     </div>
   );
 };

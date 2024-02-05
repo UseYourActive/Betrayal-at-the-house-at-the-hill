@@ -8,7 +8,7 @@ import { messageManager } from "../../utils/chatUtils";
 const ChatComponent = () => {
   let navigate = useNavigate();
   let socket = new WebSocket("ws://26.128.47.198:3001");
-  let [messages, setMessages] = useState([]); // message structure : "{ test, username, guideByServer }"
+  let [messages, setMessages] = useState([]);
   let userFromRedux = useSelector((state) => state.auth.user);
   let username = userFromRedux === "" ? "<Nameless>" : userFromRedux;
   let messageInputRef = useRef();
@@ -22,6 +22,7 @@ const ChatComponent = () => {
       setMessages([...messages, newMessage]);
     }
   });
+
   const readyPage = () => {
     navigate("/game1");
   };

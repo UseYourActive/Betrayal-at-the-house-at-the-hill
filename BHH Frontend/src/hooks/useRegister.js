@@ -6,7 +6,6 @@ const SERVER_URL = "http://26.162.187.120:8081/";
 const useRegister = (endPointValue) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);

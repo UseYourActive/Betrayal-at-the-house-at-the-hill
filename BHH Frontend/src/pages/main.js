@@ -5,7 +5,7 @@ const Main = () => {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/login");
-  }, []);
+  });
   return <div>Eha</div>;
 };
 
