@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class CreateUserOperationProcessor implements CreateUserOperation {
     private final UserRepository userRepository;
     private final CreateUserMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Operation(summary = "Create a new user")
     @Override
@@ -26,8 +28,11 @@ public class CreateUserOperationProcessor implements CreateUserOperation {
         log.info("Processing CreateUserOperation for username: {}", request.getUsername());
 
         String username = request.getUsername();
+        String password = request.getPassword();
+        String encodedPassword = passwordEncoder.encode(password);
 
         User user = User.builder()
+                .password(encodedPassword)
                 .username(username)
                 .build();
 
