@@ -15,7 +15,7 @@ public enum CharacterStats {
     EIGHT(8);
 
     private Integer value;
-    private Integer pointer;
+    private final Integer pointer;
 
     CharacterStats(Integer pointer) {
         this.pointer = pointer;
@@ -25,7 +25,4 @@ public enum CharacterStats {
         this.value = value;
     }
 
-    public void setPointer(Integer pointer) {
-        this.pointer = pointer;
-    }
 }
