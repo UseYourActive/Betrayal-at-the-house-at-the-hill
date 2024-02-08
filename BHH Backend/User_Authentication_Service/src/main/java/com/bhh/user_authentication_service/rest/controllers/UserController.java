@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
-    private final RegisterOperation createUserOperation;
-    private final LoginOperation findUserByUsernameOperation;
+    private final RegisterOperation registerOperation;
+    private final LoginOperation loginOperation;
 
     //region GET
     //endregion
@@ -42,7 +42,7 @@ public class UserController {
             summary = "Creates a new user.")
     @PostMapping(path = "/register")
     public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request) {
-        return new ResponseEntity<>(createUserOperation.process(request), HttpStatus.CREATED);
+        return new ResponseEntity<>(registerOperation.process(request), HttpStatus.CREATED);
     }
 
     @Transactional
@@ -59,7 +59,7 @@ public class UserController {
                 .password(request.getPassword())
                 .build();
 
-        return new ResponseEntity<>(findUserByUsernameOperation.process(request), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(loginOperation.process(request), HttpStatus.ACCEPTED);
     }
     //endregion
 

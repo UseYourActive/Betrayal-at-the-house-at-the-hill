@@ -20,7 +20,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Tag(name = "User Operations", description = "APIs for user operations")
-public class CreateUserOperationProcessor implements RegisterOperation {
+public class RegisterOperationProcessor implements RegisterOperation {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
