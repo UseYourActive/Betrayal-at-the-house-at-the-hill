@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import useRegister from "../../hooks/useRegister";
-const RegisterComponent = () => {
+const RegisterForm = () => {
   const {
     username,
     password,
@@ -40,4 +40,4 @@ const RegisterComponent = () => {
   );
 };
 
-export default RegisterComponent;
+export default RegisterForm;

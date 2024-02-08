@@ -1,4 +1,4 @@
-const PlayerListComponent = () => {
+const PlayerList = () => {
   return (
     <div
       className="playerList"
@@ -31,4 +31,4 @@ const PlayerListComponent = () => {
   );
 };
 
-export default PlayerListComponent;
+export default PlayerList;

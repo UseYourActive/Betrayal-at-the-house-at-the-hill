@@ -16,14 +16,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 30px;
+  padding: 40px;
   width: 600px;
   border-radius: 15px;
 }
 
 .main h1 {
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: "Creepster", system-ui;
@@ -41,6 +41,7 @@
 .main h1 span.span {
   animation: letter-flicker 2s linear infinite;
 }
+
 #myVideo {
   position: fixed;
   right: 0;
