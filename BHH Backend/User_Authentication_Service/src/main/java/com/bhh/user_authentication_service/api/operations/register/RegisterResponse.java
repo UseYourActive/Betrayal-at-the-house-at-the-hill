@@ -1,4 +1,4 @@
-package com.bhh.user_authentication_service.api.operations.create;
+package com.bhh.user_authentication_service.api.operations.register;
 
 import com.bhh.user_authentication_service.api.base.OperationOutput;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,10 @@ import lombok.Getter;
 @Builder
 @Getter
 @AllArgsConstructor
-public class CreateUserResponse implements OperationOutput {
+public class RegisterResponse implements OperationOutput {
     private String id;
     private String username;
+    private String firstName;
+    private String lastName;
+    private String jwt;
 }

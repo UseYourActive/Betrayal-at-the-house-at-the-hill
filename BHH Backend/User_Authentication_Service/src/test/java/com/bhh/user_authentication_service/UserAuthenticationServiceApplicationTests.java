@@ -1,8 +1,8 @@
 package com.bhh.user_authentication_service;
 
-import com.bhh.user_authentication_service.api.operations.create.CreateUserRequest;
-import com.bhh.user_authentication_service.api.operations.create.CreateUserResponse;
-import com.bhh.user_authentication_service.api.operations.find.byusername.FindUserByUsernameResponse;
+import com.bhh.user_authentication_service.api.operations.register.RegisterRequest;
+import com.bhh.user_authentication_service.api.operations.register.RegisterResponse;
+import com.bhh.user_authentication_service.api.operations.login.LoginResponse;
 import com.bhh.user_authentication_service.export.UserAuthFeignClient;
 import com.bhh.user_authentication_service.rest.UserAuthenticationServiceApplication;
 import org.junit.jupiter.api.Test;
@@ -30,11 +30,11 @@ class UserAuthenticationServiceApplicationTests {
     @Test
     public void testCreateUser() {
         // Mock the Feign client response
-        when(mockUserAuthFeignClient.createUser(any(CreateUserRequest.class)))
-                .thenReturn(ResponseEntity.ok(new CreateUserResponse("195fa29e-4e32-40ec-a3d9-8ffced88d02e", "username")));
+        when(mockUserAuthFeignClient.createUser(any(RegisterRequest.class)))
+                .thenReturn(ResponseEntity.ok(new RegisterResponse("195fa29e-4e32-40ec-a3d9-8ffced88d02e", "username")));
 
         // Call the Feign client method
-        ResponseEntity<CreateUserResponse> responseEntity = userAuthFeignClient.createUser(new CreateUserRequest("username"));
+        ResponseEntity<RegisterResponse> responseEntity = userAuthFeignClient.createUser(new RegisterRequest("username"));
 
         // Verify the response
         assertNotNull(responseEntity);
@@ -46,9 +46,9 @@ class UserAuthenticationServiceApplicationTests {
     @Test
     public void testFindUserByUsername() {
         when(mockUserAuthFeignClient.findUserByUsername("username"))
-                .thenReturn(ResponseEntity.ok(new FindUserByUsernameResponse("195fa29e-4e32-40ec-a3d9-8ffced88d02e", "username")));
+                .thenReturn(ResponseEntity.ok(new LoginResponse("195fa29e-4e32-40ec-a3d9-8ffced88d02e", "username")));
 
-        ResponseEntity<FindUserByUsernameResponse> responseEntity = userAuthFeignClient.findUserByUsername("username");
+        ResponseEntity<LoginResponse> responseEntity = userAuthFeignClient.findUserByUsername("username");
 
         assertNotNull(responseEntity);
         assertNotNull(responseEntity.getBody());
