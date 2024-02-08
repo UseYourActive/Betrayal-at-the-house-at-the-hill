@@ -1,4 +1,4 @@
-import LoginComponent from "../components/auth/LoginComponent";
+import LoginForm from "../components/auth/LoginForm";
 
 const LoginPage = () => {
   return (
@@ -13,10 +13,10 @@ const LoginPage = () => {
       <div className="centered-container">
         <div className="header">
           <i className="fa-solid fa-ghost left-icon"></i>
-          <h3>Game Menu</h3>
+          <h3>Login</h3>
           <i className="fa-solid fa-ghost right-icon"></i>
         </div>
-        <LoginComponent />
+        <LoginForm />
       </div>
     </div>
   );

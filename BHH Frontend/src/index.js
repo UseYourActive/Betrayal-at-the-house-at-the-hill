@@ -20,12 +20,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: [<VideoComponent />, <LoginPage />],
+    element: [
+      <VideoComponent key="loginBckg" />,
+      <LoginPage key="mainLogin" />,
+    ],
     errorElement: <p>GRESHKA SI</p>,
   },
   {
     path: "/lobby",
-    element: [<VideoComponent />, <LobbyPage />],
+    element: [<VideoComponent key="lobbyBckg" />, <LobbyPage key="main" />],
     errorElement: <p>GRESHKA SI</p>,
   },
   {
@@ -35,7 +38,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: [<VideoComponent />, <RegisterPage />],
+    element: [
+      <VideoComponent key="registerBckg" />,
+      <RegisterPage key="mainRegister" />,
+    ],
     errorElement: <p>GRESHKA SI</p>,
   },
 ]);

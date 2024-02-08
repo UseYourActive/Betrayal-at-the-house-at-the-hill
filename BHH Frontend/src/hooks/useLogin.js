@@ -5,7 +5,12 @@ const SERVER_URL = "http://26.162.187.120:8081/";
 const useLogin = ({ endPointValue }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userID, setUserID] = useState("");
   const [isLogged, setLogged] = useState(false);
+  const handleIsLoggedChange = () => {
+    setLogged(!isLogged);
+  };
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -44,9 +49,12 @@ const useLogin = ({ endPointValue }) => {
   return {
     username,
     password,
+    userID,
     isLogged,
+    setUserID,
     handleUsernameChange,
     handlePasswordChange,
+    handleIsLoggedChange,
     loginUser,
   };
 };

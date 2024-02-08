@@ -24,7 +24,7 @@
   font-size: 40px;
   opacity: 0.3;
   transition: 0.5s ease-out;
-} /*  Borko debel si, 1 chas te nqma  */
+}
 .left-icon:hover,
 .right-icon:hover {
   opacity: 1;
@@ -37,32 +37,39 @@
   font-style: normal;
   text-align: center;
 }
-.login input {
+.login .inputName input,
+.login .inputPass input {
   text-align: center;
   font-size: 30px;
   width: 300px;
   position: relative;
   top: 25px;
-  left: 50%;
+  left: 25%;
   transform: translate(-50%, -50%);
   font-family: "Kalam", cursive;
   font-weight: 700;
   font-style: normal;
 }
-.login a {
+.login .inputPass input {
+  top: 30px;
+}
+.login a.regButton,
+.login a.logButton {
   background-color: #f2ff00;
   border-radius: 30px;
   cursor: pointer;
   padding: 5px 20px;
-  text-align: center;
   position: relative;
-  top: 10px;
+  top: 20px;
   font-size: 30px;
   text-decoration: none;
   color: #fff;
   box-shadow: rgb(238, 255, 0) 0px 0px 10px;
   text-shadow: #000 1px 1px 5px;
   transition: all 0.3s ease-in;
+}
+.login a.regButton {
+  left: 10px;
 }
 .login a:hover {
   background-color: red;

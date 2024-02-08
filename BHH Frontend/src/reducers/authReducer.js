@@ -1,28 +1,23 @@
-import { LOGOUT_USER, LOG_USER, SET_USERNAME } from "../actions/actionTypes.js";
+import { SET_USERNAME, SET_SESSION } from "../actions/actionTypes.js";
 
 const initialState = {
-  isLogged: false,
-  user_id: "",
-  user: "",
+  isLogged: localStorage.length === 0 ? false : true,
+  userID: "",
+  username: JSON.parse(localStorage.getItem("userData")).username,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOG_USER:
-      return {
-        ...state,
-        isLogged: true,
-      };
-    case LOGOUT_USER:
-      return {
-        ...state,
-        isLogged: false,
-      };
     case SET_USERNAME:
       return {
         ...state,
-        user: action.payload.name,
-        user_id: action.payload.user_id,
+        username: action.payload.username,
+      };
+    case SET_SESSION:
+      return {
+        ...state,
+        username: action.payload.username,
+        userID: action.payload.userID,
       };
 
     default:

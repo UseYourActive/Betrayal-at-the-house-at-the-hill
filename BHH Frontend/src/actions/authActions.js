@@ -1,13 +1,9 @@
-import { LOG_USER, LOGOUT_USER, SET_USERNAME } from "./actionTypes.js";
+import { SET_USERNAME, SET_SESSION } from "./actionTypes.js";
 
-export const logUser = () => {
-  return { type: LOG_USER };
+export const setUsername = (username) => {
+  return { type: SET_USERNAME, payload: { username } };
 };
 
-export const logOutUser = () => {
-  return { type: LOGOUT_USER };
-};
-
-export const setUsername = (name, user_id) => {
-  return { type: SET_USERNAME, payload: { name, user_id } };
+export const setSession = ({ userID, username, password }) => {
+  return { type: SET_SESSION, payload: { userID, username, password } };
 };
