@@ -6,6 +6,7 @@ import com.bhh.user_authentication_service.api.operations.register.RegisterRespo
 import com.bhh.user_authentication_service.core.exceptions.NotMatchingPasswordsException;
 import com.bhh.user_authentication_service.core.exceptions.UsernameAlreadyExistsException;
 import com.bhh.user_authentication_service.persistence.entities.User;
+import com.bhh.user_authentication_service.persistence.enums.Role;
 import com.bhh.user_authentication_service.persistence.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,23 +38,20 @@ public class RegisterOperationProcessor implements RegisterOperation {
             throw new UsernameAlreadyExistsException("User with given username already exists!");
         }
 
-        String firstName = request.getFirstName();
-        String lastName = request.getLastName();
-        String repeatedPassword = request.getRepeatedPassword();
         String username = request.getUsername();
         String password = request.getPassword();
+//        String repeatedPassword = request.getRepeatedPassword();
         String encodedPassword = passwordEncoder.encode(password);
 
-        if (!password.equals(repeatedPassword)) {
-            log.error("Passwords do not match for username '{}'", request.getUsername());
-            throw new NotMatchingPasswordsException("Provided passwords do not match");
-        }
+//        if (!password.equals(repeatedPassword)) {
+//            log.error("Passwords do not match for username '{}'", request.getUsername());
+//            throw new NotMatchingPasswordsException("Provided passwords do not match");
+//        }
 
         User user = User.builder()
-                .firstName(firstName)
-                .lastName(lastName)
                 .password(encodedPassword)
                 .username(username)
+                .role(Role.USER)
                 .build();
 
         log.debug("Saving user to the database: {}", user);
@@ -71,8 +69,7 @@ public class RegisterOperationProcessor implements RegisterOperation {
     private RegisterResponse mapToResponse(User user, String jwt) {
         return RegisterResponse.builder()
                 .id(String.valueOf(user.getId()))
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
+                .role(String.valueOf(user.getRole()))
                 .username(user.getUsername())
                 .jwt(jwt)
                 .build();
