@@ -29,7 +29,7 @@ public class RegisterOperationProcessor implements RegisterOperation {
     @Operation(summary = "Create a new user")
     @Override
     public RegisterResponse process(final RegisterRequest request) {
-        log.info("Processing CreateUserOperation for username: {}", request.getUsername());
+        log.info("Processing to register a new user with username: {}", request.getUsername());
 
         Optional<User> userByUsername = userRepository.findUserByUsername(request.getUsername());
 
@@ -60,10 +60,10 @@ public class RegisterOperationProcessor implements RegisterOperation {
 
         String jwt = jwtService.generateToken(user);
 
-        RegisterResponse createUserResponse = mapToResponse(savedUser, jwt);
+        RegisterResponse response = mapToResponse(savedUser, jwt);
 
-        log.info("CreateUserOperation processed successfully for username: {}", request.getUsername());
-        return createUserResponse;
+        log.info("Returning response for user with username {}: {}", request.getUsername(), response);
+        return response;
     }
 
     private RegisterResponse mapToResponse(User user, String jwt) {

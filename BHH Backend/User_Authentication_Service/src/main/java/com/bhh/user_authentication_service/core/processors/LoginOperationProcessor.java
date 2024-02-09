@@ -24,7 +24,7 @@ public class LoginOperationProcessor implements LoginOperation {
 
     @Override
     public LoginResponse process(final LoginRequest request) {
-        log.info("Processing request to find user by username: {}", request.getUsername());
+        log.info("Processing request to log in with username: {}", request.getUsername());
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

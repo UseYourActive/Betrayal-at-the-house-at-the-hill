@@ -5,17 +5,14 @@ import com.bhh.user_authentication_service.api.operations.register.RegisterRespo
 import com.bhh.user_authentication_service.api.operations.login.LoginResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "user-auth-service", url = "http://localhost:8081")
 public interface UserAuthFeignClient {
 
-    @PostMapping("/users/create")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/create")
     ResponseEntity<RegisterResponse> createUser(@RequestBody RegisterRequest request);
 
-    @GetMapping("/users/{username}")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/{username}")
     ResponseEntity<LoginResponse> findUserByUsername(@PathVariable("username") String username);
 }
