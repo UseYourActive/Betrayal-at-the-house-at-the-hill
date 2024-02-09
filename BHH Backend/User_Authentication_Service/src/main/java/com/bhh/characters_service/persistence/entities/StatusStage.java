@@ -8,7 +8,7 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "status_stage")
+@Table(name = "status_stages")
 @Builder
 @AllArgsConstructor
 @Getter
