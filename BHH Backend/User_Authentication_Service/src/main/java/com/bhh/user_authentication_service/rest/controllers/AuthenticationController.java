@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("/users")
+@RequestMapping("/auth")
 @CrossOrigin
-public class UserController {
+public class AuthenticationController {
     private final RegisterOperation registerOperation;
     private final LoginOperation loginOperation;
 

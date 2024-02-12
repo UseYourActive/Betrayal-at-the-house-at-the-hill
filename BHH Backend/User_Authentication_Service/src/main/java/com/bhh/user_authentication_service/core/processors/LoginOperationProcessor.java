@@ -4,7 +4,10 @@ import com.bhh.user_authentication_service.api.operations.login.LoginOperation;
 import com.bhh.user_authentication_service.api.operations.login.LoginRequest;
 import com.bhh.user_authentication_service.api.operations.login.LoginResponse;
 import com.bhh.user_authentication_service.core.exceptions.UserNotFoundException;
+import com.bhh.user_authentication_service.persistence.entities.Token;
 import com.bhh.user_authentication_service.persistence.entities.User;
+import com.bhh.user_authentication_service.persistence.enums.TokenType;
+import com.bhh.user_authentication_service.persistence.repositories.TokenRepository;
 import com.bhh.user_authentication_service.persistence.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +24,7 @@ public class LoginOperationProcessor implements LoginOperation {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final TokenRepository tokenRepository;
 
     @Override
     public LoginResponse process(final LoginRequest request) {
@@ -48,13 +52,29 @@ public class LoginOperationProcessor implements LoginOperation {
 
         log.info("User found with username {}: {}", request.getUsername(), user);
 
+        Token token = saveUserToken(user, jwt);
+
         LoginResponse response = LoginResponse.builder()
                 .id(String.valueOf(user.getId()))
                 .username(user.getUsername())
-                .jwt(jwt)
+                .jwt(token.getToken())
                 .build();
 
         log.info("Returning response for user with username {}: {}", request.getUsername(), response);
         return response;
+    }
+
+    private Token saveUserToken(User user, String jwt) {
+        Token token = Token.builder()
+                .user(user)
+                .token(jwt)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+
+        tokenRepository.save(token);
+
+        return token;
     }
 }
