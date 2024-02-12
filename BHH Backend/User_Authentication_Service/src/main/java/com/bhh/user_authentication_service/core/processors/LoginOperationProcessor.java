@@ -12,7 +12,10 @@ import com.bhh.user_authentication_service.persistence.repositories.UserReposito
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +33,7 @@ public class LoginOperationProcessor implements LoginOperation {
     public LoginResponse process(final LoginRequest request) {
         log.info("Processing request to log in with username: {}", request.getUsername());
 
-        authenticationManager.authenticate(
+        Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
                         request.getPassword()
@@ -73,8 +76,8 @@ public class LoginOperationProcessor implements LoginOperation {
                 .revoked(false)
                 .build();
 
-        tokenRepository.save(token);
+        Token savedToken = tokenRepository.save(token);
 
-        return token;
+        return savedToken;
     }
 }

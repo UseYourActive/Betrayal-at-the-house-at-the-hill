@@ -85,9 +85,9 @@ public class RegisterOperationProcessor implements RegisterOperation {
                 .revoked(false)
                 .build();
 
-        tokenRepository.save(token);
+        Token savedToken = tokenRepository.save(token);
 
-        return token;
+        return savedToken;
     }
 
     private RegisterResponse mapToResponse(User user, String jwt) {

@@ -64,16 +64,16 @@ public class AuthenticationController {
         return new ResponseEntity<>(loginOperation.process(request), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping(path = "/logout")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully logged out."),
-            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = "text/html"))
-    })
-    @Operation(description = "Logs out the currently authenticated user.",
-            summary = "Logout user.")
-    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
-        return ResponseEntity.ok().build();
-    }
+//    @PostMapping(path = "/logout")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Successfully logged out."),
+//            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = "text/html"))
+//    })
+//    @Operation(description = "Logs out the currently authenticated user.",
+//            summary = "Logout user.")
+//    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+//        return ResponseEntity.ok().build();
+//    }
     //endregion
 
     //region PUT
