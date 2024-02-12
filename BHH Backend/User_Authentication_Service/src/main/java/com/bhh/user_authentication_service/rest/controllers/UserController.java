@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +62,17 @@ public class UserController {
                 .build();
 
         return new ResponseEntity<>(loginOperation.process(request), HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping(path = "/logout")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully logged out."),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = "text/html"))
+    })
+    @Operation(description = "Logs out the currently authenticated user.",
+            summary = "Logout user.")
+    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok().build();
     }
     //endregion
 

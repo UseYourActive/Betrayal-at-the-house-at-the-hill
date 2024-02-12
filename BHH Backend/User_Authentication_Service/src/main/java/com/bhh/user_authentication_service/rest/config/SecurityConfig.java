@@ -1,7 +1,9 @@
 package com.bhh.user_authentication_service.rest.config;
 
 import com.bhh.user_authentication_service.core.filters.JwtAuthenticationFilter;
+import com.bhh.user_authentication_service.core.processors.JwtLogoutService;
 import com.bhh.user_authentication_service.core.processors.UserDetailsService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtLogoutService jwtLogoutService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,6 +40,13 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            jwtLogoutService.logout(request, response, authentication);
+                            response.setStatus(HttpServletResponse.SC_OK);
+                        })
+                )
                 .build();
     }
 
