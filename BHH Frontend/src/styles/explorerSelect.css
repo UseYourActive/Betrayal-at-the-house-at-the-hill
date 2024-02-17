@@ -1,0 +1,53 @@
+.explorer-select-container {
+  position: absolute;
+  top: 15%;
+  left: 34%;
+  background-color: red;
+  width: 1000px;
+  height: 720px;
+  display: flex;
+  flex-direction: row;
+}
+
+.mini-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 25%;
+  height: 100%;
+  background-color: green;
+}
+.explorer-pair-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.explorer-card {
+  background: none;
+  border: 0px black solid;
+  width: 100px;
+  margin: 0 4px;
+  display: inline-block;
+}
+
+.explorer-preview {
+  width: 80%;
+  height: 100%;
+  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/*
+
+  display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 10px;
+
+*/

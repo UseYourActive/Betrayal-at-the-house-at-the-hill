@@ -1,46 +1,53 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setSession } from "../actions/authActions";
 
-const SERVER_URL = "http://26.162.187.120:8081/";
+const SERVER_URL = "http://26.162.187.120:8081";
 
-const useLogin = ({ endPointValue }) => {
+const useLogin = (endPointValue) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userID, setUserID] = useState("");
-  const [isLogged, setLogged] = useState(false);
-  const handleIsLoggedChange = () => {
-    setLogged(!isLogged);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleUsernameChange = (username) => {
+    setUsername(username);
   };
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handlePasswordChange = (password) => {
+    setPassword(password);
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const loginUser = async (navigate) => {
+  const loginUser = async () => {
     try {
       const response = await fetch(SERVER_URL + endPointValue, {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
       });
-      if (!response.ok) {
+      console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+
+        dispatch(setSession(data));
+
+        // Save user data in localStorage
+        localStorage.setItem("userData", JSON.stringify(data));
+
+        // Navigate to the lobby page
+        navigate("/lobby");
+      } else if (!response.ok) {
         // Handle error, maybe show a message to the user
         console.error("Login failed");
         return;
       }
-      const data = await response.json();
-      setLogged(true);
-      console.log(isLogged);
-      console.log(data);
-      // Save user data in localStorage
-      localStorage.setItem("userData", JSON.stringify(data));
-
-      // Navigate to the lobby page
-      navigate("/lobby");
     } catch (error) {
       console.error("Error during login:", error);
     }
@@ -50,11 +57,9 @@ const useLogin = ({ endPointValue }) => {
     username,
     password,
     userID,
-    isLogged,
     setUserID,
     handleUsernameChange,
     handlePasswordChange,
-    handleIsLoggedChange,
     loginUser,
   };
 };

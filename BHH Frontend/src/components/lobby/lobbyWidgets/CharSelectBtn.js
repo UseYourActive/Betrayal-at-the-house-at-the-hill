@@ -1,6 +1,23 @@
-import React from "react";
-const CharSelectBtn = ({ backgroundColor, handleClick }) => {
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-has-content */
+
+import { useContext, useState } from "react";
+import useImage from "../../../hooks/useImage";
+import { imgContext } from "../ExplorerSelection";
+
+const CharSelectBtn = ({ charSrc, colorId }) => {
+  let focusImg = useContext(imgContext);
+  let imgEndPoint = charSrc + colorId + ".png";
+  let { currImageSrc } = useImage(imgEndPoint);
+
+  const handleClick = () => {
+    focusImg(imgEndPoint);
+  };
+  const clearHovering = () => {
+    console.log("triggered blur");
+  };
   return (
+    /*
     <svg
       height="350"
       width="360"
@@ -15,7 +32,10 @@ const CharSelectBtn = ({ backgroundColor, handleClick }) => {
           strokeWidth: "3",
         }}
       />
-    </svg>
+    </svg>*/
+    <a className="explorer-card" onClick={handleClick} onBlur={clearHovering}>
+      <img src={currImageSrc} alt="error" style={{ width: "100%" }} />
+    </a>
   );
 };
 

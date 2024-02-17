@@ -10,7 +10,7 @@
   font-weight: 400;
   font-style: normal;
   text-align: center;
-}
+} /*
 h1 {
   font-size: 70px;
   color: #fff;
@@ -19,7 +19,7 @@ h1 {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
-
+*/
 .register-input {
   margin: 20px 0;
   text-align: center;

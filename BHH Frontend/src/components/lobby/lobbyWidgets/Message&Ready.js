@@ -28,6 +28,8 @@ const MessageNReady = ({ socket, username }) => {
         Send
       </button>
       <ReadyBtn socket={socket} />
+      <span>3/4</span>
+      <i className="fa-solid fa-user"></i>
     </div>
   );
 };

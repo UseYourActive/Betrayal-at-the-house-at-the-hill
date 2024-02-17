@@ -40,7 +40,7 @@
 .login .inputName input,
 .login .inputPass input {
   text-align: center;
-  font-size: 30px;
+  font-size: 24px;
   width: 300px;
   position: relative;
   top: 25px;
@@ -76,4 +76,19 @@
   box-shadow: rgb(255, 0, 0) 0px 0px 10px;
   color: #000;
   text-shadow: #fff 1px 1px 4px;
+}
+
+a.logButton {
+  background-color: #f2ff00;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 5px 20px;
+  position: relative;
+  top: 20px;
+  font-size: 30px;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: rgb(238, 255, 0) 0px 0px 10px;
+  text-shadow: #000 1px 1px 5px;
+  transition: all 0.3s ease-in;
 }

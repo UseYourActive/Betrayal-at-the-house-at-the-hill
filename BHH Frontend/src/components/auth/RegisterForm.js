@@ -7,20 +7,22 @@ const RegisterForm = () => {
     handleUsernameChange,
     handlePasswordChange,
     registerUser,
-  } = useRegister("users/create");
+  } = useRegister("/auth/register");
 
   const handleRegister = async () => {
-    if (username !== "" && password !== "") {
+    if (username.length !== 0 && password.length !== 0) {
       registerUser();
     } else {
-      alert("Ai da ni sa praish i da napishesh i dvete");
+      console.log("Greshka si");
     }
   };
   return (
     <div className="register-container">
       <h2>Register</h2>
       <input
-        onChange={handleUsernameChange}
+        onChange={(e) => {
+          handleUsernameChange(e.target.value);
+        }}
         type="text"
         className="register-input"
         placeholder="Enter your name..."
@@ -28,7 +30,9 @@ const RegisterForm = () => {
         minLength={1}
       />
       <input
-        onChange={handlePasswordChange}
+        onChange={(e) => {
+          handlePasswordChange(e.target.value);
+        }}
         type="password"
         className="register-input"
         placeholder="Enter your password..."

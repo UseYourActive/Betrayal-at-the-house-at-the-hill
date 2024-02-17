@@ -1,10 +1,14 @@
 import RegisterForm from "../components/auth/RegisterForm";
+import VideoComponent from "../components/background/VideoComponent";
 
 const RegisterPage = () => {
   return (
-    <div>
-      <RegisterForm />
-    </div>
+    <>
+      <VideoComponent />
+      <div>
+        <RegisterForm />
+      </div>
+    </>
   );
 };
 

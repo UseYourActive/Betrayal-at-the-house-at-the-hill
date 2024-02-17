@@ -2,10 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
 
 @import url("./reset.css");
 @import url("./login.css");
-@import url("./chat.css");
+@import url("./lobby.css");
 @import url("./register.css");
 @import url("./keyframes.css");
 @import url("./explorerSelect.css");

@@ -1,9 +1,13 @@
-import { SET_USERNAME, SET_SESSION } from "../actions/actionTypes.js";
+import {
+  SET_USERNAME,
+  SET_SESSION,
+  CLEAR_SESSION,
+} from "../actions/actionTypes.js";
 
 const initialState = {
-  isLogged: localStorage.length === 0 ? false : true,
   userID: "",
-  username: JSON.parse(localStorage.getItem("userData")).username,
+  username: "",
+  jwt: "",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -18,8 +22,14 @@ const authReducer = (state = initialState, action) => {
         ...state,
         username: action.payload.username,
         userID: action.payload.userID,
+        jwt: action.payload.jwt,
       };
 
+    case CLEAR_SESSION:
+      localStorage.clear();
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

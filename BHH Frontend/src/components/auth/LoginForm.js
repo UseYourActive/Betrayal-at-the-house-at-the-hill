@@ -3,32 +3,33 @@
 
 import { useNavigate } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import LoginBtn from "./authWidgets/loginBtn";
 import RedirectToRegisterBtn from "./authWidgets/goToRegisterBtn";
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-  let [username, setTestUsername] = useState(); // comment when server's up
+  let logUserRef = useRef();
+  let logPassRef = useRef();
+
   const {
-    // username,
-    // isLogged,
-    // password,
-    // userID,
-    // setUserID,
+    username,
+    isLogged,
+    password,
+    userID,
+    setUserID,
     handleUsernameChange,
     handlePasswordChange,
-    // handleIsLoggedChange,
-    //  loginUser
-  } = useLogin("");
+    handleIsLoggedChange,
+    loginUser,
+  } = useLogin("/auth/login");
 
+  const navigate = useNavigate();
   return (
     <div className="login">
       <div className="inputName">
         <input
           onChange={(e) => {
-            handleUsernameChange(e);
-            setTestUsername(e.target.value);
+            handleUsernameChange(e.target.value);
           }}
           type="text"
           placeholder="Enter your name..."
@@ -38,17 +39,19 @@ const LoginForm = () => {
       </div>
       <div className="inputPass">
         <input
-          onChange={handlePasswordChange}
-          type="text"
+          onChange={(e) => {
+            handlePasswordChange(e.target.value);
+          }}
+          type="password"
           placeholder="Enter your password..."
           maxLength={20}
           minLength={1}
         />
       </div>
 
-      <LoginBtn
-        username={username} /*  userdata={{username, userID, password}} */
-      />
+      <a className="logButton" onClick={loginUser}>
+        Log In
+      </a>
       <RedirectToRegisterBtn />
     </div>
   );

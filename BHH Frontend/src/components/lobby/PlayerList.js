@@ -1,27 +1,8 @@
 const PlayerList = () => {
   return (
-    <div
-      className="playerList"
-      style={{
-        backgroundColor: "blue",
-        color: "white",
-        width: "20%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div className="playerList">
       <h1>Players:</h1>
-      <ul
-        style={{
-          backgroundColor: "blue",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <ul>
         <li>Player1</li>
         <li>Player2</li>
         <li>Player3</li>

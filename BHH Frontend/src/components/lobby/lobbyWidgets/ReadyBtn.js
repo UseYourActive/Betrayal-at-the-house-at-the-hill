@@ -8,7 +8,11 @@ const ReadyBtn = ({ socket }) => {
   };
 
   return (
-    <button onClick={toggleReady} style={isReady ? redStyles : greenStyles}>
+    <button
+      id="ready-button"
+      onClick={toggleReady}
+      style={isReady ? redStyles : greenStyles}
+    >
       {" "}
       {isReady ? "Cancel" : "Ready"}
     </button>
