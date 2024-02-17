@@ -1,6 +1,8 @@
 package com.bhh.user_authentication_service.rest.handlers;
 
+import com.bhh.user_authentication_service.core.exceptions.NotMatchingPasswordsException;
 import com.bhh.user_authentication_service.core.exceptions.UserNotFoundException;
+import com.bhh.user_authentication_service.core.exceptions.UsernameAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -32,6 +34,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> handleBookNotFoundException(UserNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found! " + e.getMessage());
+    }
+
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<String> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already exists in the database! " + e.getMessage());
+    }
+
+    @ExceptionHandler(NotMatchingPasswordsException.class)
+    public ResponseEntity<String> handleNotMatchingPasswordsException(NotMatchingPasswordsException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Passwords do not match! " + e.getMessage());
     }
 
     @Override
