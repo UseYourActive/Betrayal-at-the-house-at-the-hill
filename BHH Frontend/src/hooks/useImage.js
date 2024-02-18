@@ -9,7 +9,7 @@ const useImage = (endPoint) => {
 
   useEffect(() => {
     // Dynamic import of the image
-    import("../assets/gameRelated/explorers/" + endPoint)
+    import("../assets/explorers/" + endPoint + ".png")
       .then((module) => {
         setCurrImgSrc(module.default);
       })

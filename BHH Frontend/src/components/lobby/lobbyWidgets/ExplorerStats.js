@@ -1,8 +1,12 @@
+// button functionality
 const ExplorerStats = () => {
   return (
-    <div
-      style={{ width: "100%", height: "15%", backgroundColor: "blue" }}
-    ></div>
+    <div className="explorer-stat-container">
+      <span>Age: 8</span>
+      <span>Weight: 49lbs</span>
+      <span>Hobbies: Dolls, Music</span>
+      <span>Birthday: November 5th</span>
+    </div>
   );
 };
 

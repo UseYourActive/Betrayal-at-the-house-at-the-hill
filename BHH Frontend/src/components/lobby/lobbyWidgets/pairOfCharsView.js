@@ -1,11 +1,29 @@
+import { explorers } from "../../../data/explorersList";
 import CharSelectBtn from "./CharSelectBtn";
 
 const PairOfCharView = ({ colorGroup }) => {
   return (
     <>
-      <div className="explorer-pair-container">
-        <CharSelectBtn charSrc={colorGroup} colorId={"-1"} />
-        <CharSelectBtn charSrc={colorGroup} colorId={"-2"} />
+      <h2 className="color-name-heading" key={colorGroup + "-heading"}>
+        {" "}
+        {colorGroup}
+      </h2>
+      <div
+        key={colorGroup}
+        className="explorer-pair-container"
+        style={{ backgroundColor: colorGroup }}
+      >
+        {explorers[colorGroup].map((explorer, index) => {
+          return (
+            <>
+              <CharSelectBtn
+                keyID={colorGroup + "-" + index}
+                color={colorGroup}
+                charName={explorer}
+              />
+            </>
+          );
+        })}
       </div>
     </>
   );

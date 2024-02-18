@@ -17,7 +17,7 @@ const LobbyPage = () => {
   return (
     <>
       <VideoComponent />
-      <div id="main-container">
+      <div id="main-container" key="mc">
         <TextHeader username={username} />
         <div id="grouped-container">
           <Chat username={username} />

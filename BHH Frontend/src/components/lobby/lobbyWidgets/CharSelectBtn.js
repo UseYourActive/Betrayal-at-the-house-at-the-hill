@@ -1,20 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import useImage from "../../../hooks/useImage";
 import { imgContext } from "../ExplorerSelection";
 
-const CharSelectBtn = ({ charSrc, colorId }) => {
-  let focusImg = useContext(imgContext);
-  let imgEndPoint = charSrc + colorId + ".png";
+const CharSelectBtn = ({ color, charName, keyID }) => {
+  let { setOnPreview } = useContext(imgContext);
+  let imgEndPoint = color + "-" + charName;
   let { currImageSrc } = useImage(imgEndPoint);
+  let { allowChoice } = useContext(imgContext);
 
-  const handleClick = () => {
-    focusImg(imgEndPoint);
-  };
-  const clearHovering = () => {
-    console.log("triggered blur");
+  const handleClick = (e) => {
+    if (allowChoice) {
+      setOnPreview(imgEndPoint);
+    } else {
+    }
   };
   return (
     /*
@@ -33,7 +34,7 @@ const CharSelectBtn = ({ charSrc, colorId }) => {
         }}
       />
     </svg>*/
-    <a className="explorer-card" onClick={handleClick} onBlur={clearHovering}>
+    <a className="explorer-card" key={keyID} onClick={handleClick}>
       <img src={currImageSrc} alt="error" style={{ width: "100%" }} />
     </a>
   );
