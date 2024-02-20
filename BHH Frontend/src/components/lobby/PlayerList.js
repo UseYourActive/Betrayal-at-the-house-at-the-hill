@@ -1,4 +1,4 @@
-const PlayerList = () => {
+const PlayerList = (socket) => {
   return (
     <div className="playerList">
       <h1>Players:</h1>

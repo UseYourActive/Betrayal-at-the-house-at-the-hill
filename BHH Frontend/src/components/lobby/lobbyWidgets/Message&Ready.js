@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import sendWsMessage from "../../../utils/sendWsMessage";
+import { sendWsMessage } from "../../../utils/sendWsMessage";
 import ReadyBtn from "./ReadyBtn";
 // import { useNavigate } from "react-router-dom";
 
-const MessageNReady = ({ socket, username }) => {
+const MessageNReady = ({ socket, username, sentHandler }) => {
   let messageInputRef = useRef();
 
   return (
@@ -17,6 +17,7 @@ const MessageNReady = ({ socket, username }) => {
       <button
         id="send-button"
         onClick={() => {
+          sentHandler();
           if (messageInputRef.current.value !== "") {
             let text = messageInputRef.current.value.trim();
             let dataCollection = { text };

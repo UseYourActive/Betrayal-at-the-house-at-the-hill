@@ -1,4 +1,4 @@
-const SERVER_URL = "http://26.162.187.120:8081";
+import { SERVER_URL } from "../data/serverURL";
 
 const useLogOut = (endPointValue) => {
   // const [username, setUsername] = useState("");

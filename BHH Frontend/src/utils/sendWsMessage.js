@@ -6,11 +6,21 @@ const sendWsMessage = (socket, dataCollection, username, instruction) => {
       instruction,
     });
     socket.send(formattedData);
-  } else {
   }
 };
 
-export default sendWsMessage;
+const sendLoginWsMessage = (socket, username) => {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    let formattedData = JSON.stringify({
+      username,
+      instruction: "doConnect",
+      text: " joined the chat.",
+    });
+    socket.send(formattedData);
+  }
+};
+
+export { sendWsMessage, sendLoginWsMessage };
 
 /*       
                   if (text === "") {
